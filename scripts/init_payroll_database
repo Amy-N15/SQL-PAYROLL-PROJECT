@@ -1,0 +1,42 @@
+/*
+=============================================================
+Create Database and Schemas
+=============================================================
+Script Purpose:
+    This script creates a new database named 'Payroll' after checking if it already exists. 
+    If the database exists, it is dropped and recreated. Additionally, the script sets up three schemas 
+    within the database: 'LANDING', 'STAGING', and 'MARTS'.
+	
+WARNING:
+    Running this script will drop the entire Payroll' database if it exists. 
+    All data in the database will be permanently deleted. Proceed with caution 
+    and ensure you have proper backups before running this script.
+*/
+
+
+USE master; -- switch to master database first/ database that controls all databases in SQL Server
+GO
+
+-- Drop and recreate the 'payroll' database
+IF EXISTS 
+	(SELECT 1 
+	 FROM sys.databases 
+	 WHERE name = 'Payroll')
+BEGIN
+    ALTER DATABASE payroll
+	SET SINGLE_USER
+	WITH ROLLBACK IMMEDIATE;
+    DROP DATABASE Payroll; 
+END;
+GO
+
+-- Create the 'Payroll' database
+CREATE DATABASE Payroll
+
+-- Create Schemas
+
+CREATE SCHEMA LANDING; 
+
+CREATE SCHEMA STAGING; 
+
+CREATE SCHEMA MARTS; 
