@@ -170,3 +170,14 @@ CREATE TABLE landing.lnd_timesheet(
 	pay_period_id					NVARCHAR(50)
 );
 
+-- LANDING.lnd_combined_holidays
+IF OBJECT_ID('landing.lnd_combined_holidays', 'U') IS NOT NULL
+	DROP TABLE landing.lnd_combined_holidays;
+
+CREATE TABLE landing.lnd_combined_holidays(
+	Date							NVARCHAR(255),
+	Holiday_Name					NVARCHAR(255),
+	Information_More_Information	NVARCHAR(MAX),
+	Jurisdiction					NVARCHAR(255),
+	Day_Of_Week						NVARCHAR(255)
+);
