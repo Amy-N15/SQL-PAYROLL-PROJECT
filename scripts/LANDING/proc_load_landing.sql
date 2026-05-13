@@ -232,6 +232,22 @@ BEGIN
 		PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
 		PRINT '>> -------------';
 
+		-- Landing.lnd_combined_holidays
+		SET @start_time = GETDATE();
+		PRINT '>> Truncating Table: landing.lnd_combined_holidays';
+		TRUNCATE TABLE landing.lnd_combined_holidays;
+
+		PRINT '>> Inserting Data Into: landing.lnd_combined_holidays';
+		BULK INSERT landing.lnd_combined_holidays
+		FROM 'C:\Users\phuon\OneDrive\Documents\AMY_IT\SQL_Projects\Payroll_Project\datasets\combined_holidays.csv'
+		WITH (
+		FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		TABLOCK
+		);
+		SET @end_time = GETDATE();
+		PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+		PRINT '>> -------------';
 
 		SET @batch_end_time = GETDATE();
 		PRINT '=========================================='
